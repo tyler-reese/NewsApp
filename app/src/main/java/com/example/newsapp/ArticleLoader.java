@@ -2,12 +2,9 @@ package com.example.newsapp;
 
 import android.content.Context;
 import android.content.AsyncTaskLoader;
-
 import java.util.List;
 
 public class ArticleLoader extends AsyncTaskLoader<List<Article>> {
-
-    private static final String LOG_TAG = ArticleLoader.class.getName();
 
     private String mUrl;
 
@@ -27,7 +24,6 @@ public class ArticleLoader extends AsyncTaskLoader<List<Article>> {
             return null;
         }
 
-        List<Article> articles = QueryUtils.fetchArticleData(mUrl);
-        return articles;
+        return QueryUtils.fetchArticleData(mUrl);
     }
 }
