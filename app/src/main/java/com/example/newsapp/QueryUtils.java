@@ -114,8 +114,10 @@ public final class QueryUtils {
                 String pillar = currentArticle.optString("pillarName");
                 String section = currentArticle.getString("sectionName");
                 String webPublicationDate = currentArticle.optString("webPublicationDate");
-                String author = currentArticle.optString("contributor");
                 String webUrl = currentArticle.optString("webUrl");
+                JSONArray tags = currentArticle.getJSONArray("tags");
+                JSONObject taglist = tags.getJSONObject(0);
+                String author = taglist.optString("webTitle");
                 articles.add(new Article(webTitle, pillar + "/" + section, webPublicationDate, author, webUrl));
             }
 

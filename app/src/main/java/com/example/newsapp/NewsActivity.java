@@ -46,7 +46,9 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
                 Article currentArticle = mAdapter.getItem(position);
                 Uri articleURI = Uri.parse(currentArticle.getURL());
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, articleURI);
-                startActivity(websiteIntent);
+                if (websiteIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(websiteIntent);
+                }
             }
         });
 
@@ -68,6 +70,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         Uri.Builder uriBuilder = baseUri.buildUpon();
         uriBuilder.appendQueryParameter("q", "sport");
         uriBuilder.appendQueryParameter("order-by", "newest");
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("api-key", "f1a56a57-6d60-40af-b327-6fcc5ad03c40");
         return new ArticleLoader(this, uriBuilder.toString());
     }
